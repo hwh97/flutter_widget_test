@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test_widget/widget/progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_test_widget/widget/progress_bar/progress_bar.dart';
 
 void main() => runApp(MyApp());
@@ -48,13 +49,17 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+//    setState(() {
+//      // This call to setState tells the Flutter framework that something has
+//      // changed in this State, which causes it to rerun the build method below
+//      // so that the display can reflect the updated values. If we changed
+//      // _counter without calling setState(), then the build method would not be
+//      // called again, and so nothing would appear to happen.
+//      _counter++;
+//    });
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _counter += 10;
+      _counter = _counter >= 100 ? 0 : _counter;
     });
   }
 
@@ -92,14 +97,17 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ProgressBar(
-              progress: 50,
-              minProgress: 0,
-              radius: 100,
-              maxProgress: 100,
-              backgroundColor: Colors.grey,
-              foregroundColor: Colors.greenAccent,
-              animationTime: 1000,
+            new SizedBox(
+              width: 180.0,
+              height: 50.0,
+              child: FAProgressBar(
+                currentValue: _counter,
+                size: 50,
+                maxValue: 100,
+                borderRadius: 100,
+                backgroundColor: Colors.grey,
+                progressColor: Colors.green,
+              ),
             )
           ],
         ),
@@ -110,5 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 }
